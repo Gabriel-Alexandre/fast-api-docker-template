@@ -1,0 +1,132 @@
+COMANDOS ÚTEIS PARA O PROJETO FASTAPI
+====================================
+
+COMANDOS DOCKER
+--------------
+
+Construção e Execução:
+---------------------
+# Construir a imagem Docker
+docker-compose build
+
+# Iniciar os containers
+docker-compose up
+
+# Iniciar os containers em modo detached (background)
+docker-compose up -d
+
+# Parar os containers
+docker-compose down
+
+# Reconstruir a imagem e iniciar os containers
+docker-compose up --build
+
+
+Logs e Monitoramento:
+-------------------
+# Ver logs dos containers
+docker-compose logs
+
+# Ver logs em tempo real
+docker-compose logs -f
+
+# Ver logs específicos do serviço api
+docker-compose logs api
+
+
+Gerenciamento de Containers:
+--------------------------
+# Listar containers em execução
+docker ps
+
+# Listar todos os containers (incluindo parados)
+docker ps -a
+
+# Remover todos os containers parados
+docker container prune
+
+# Entrar no container em execução
+docker-compose exec api bash
+
+
+Limpeza:
+-------
+# Remover volumes não utilizados
+docker volume prune
+
+# Remover imagens não utilizadas
+docker image prune
+
+# Remover tudo que não está sendo usado (containers, networks, imagens)
+docker system prune
+
+
+COMANDOS FASTAPI (DESENVOLVIMENTO LOCAL)
+--------------------------------------
+
+Ambiente Virtual:
+---------------
+# Criar ambiente virtual
+python -m venv venv
+
+# Ativar ambiente virtual (Windows)
+venv\Scripts\activate
+
+# Ativar ambiente virtual (Linux/Mac)
+source venv/bin/activate
+
+# Desativar ambiente virtual
+deactivate
+
+
+Dependências:
+-----------
+# Instalar dependências
+pip install -r requirements.txt
+
+# Atualizar requirements.txt com novas dependências
+pip freeze > requirements.txt
+
+
+Execução Local:
+-------------
+# Iniciar servidor FastAPI localmente
+uvicorn app.main:app --reload
+
+# Iniciar servidor FastAPI especificando host e porta
+uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+
+URLs IMPORTANTES
+--------------
+API Principal: http://localhost:8000
+Documentação Swagger: http://localhost:8000/docs
+Documentação ReDoc: http://localhost:8000/redoc
+
+
+DICAS DE DESENVOLVIMENTO
+-----------------------
+
+Reconstrução após Alterações:
+---------------------------
+Se você adicionar novas dependências no requirements.txt, execute:
+docker-compose down
+docker-compose build
+docker-compose up
+
+Hot Reload:
+----------
+O projeto está configurado com volumes no docker-compose.yml, então as alterações 
+no código são refletidas automaticamente sem necessidade de reconstruir a imagem.
+
+Debugando:
+---------
+Para ver logs detalhados, use:
+docker-compose logs -f api
+
+Boas Práticas:
+------------
+1. Sempre mantenha o requirements.txt atualizado
+2. Use branches para novas features
+3. Documente novas rotas na API
+4. Teste as alterações localmente antes de fazer deploy 
